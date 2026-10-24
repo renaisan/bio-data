@@ -1,521 +1,566 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Renaissan BIO-DATA</title>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-
-        body {
-            background-color: #F4F7FB;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            overflow-x: hidden;
-        }
-
-        img { max-width: 100%; }
-
-        /* ---------- Navbar ---------- */
-        .navbar {
-            width: calc(100% - 24px);
-            max-width: 1300px;
-            min-height: 70px;
-            margin: 10px auto 0;
-            padding: 0 30px;
-            background-color: #2563EB;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            border-radius: 30px;
-            position: sticky;
-            top: 10px;
-            z-index: 1000;
-            box-shadow: 2px 2px 5px black;
-        }
-
-        .name {
-            color: white;
-            font-size: 19px;
-            white-space: nowrap;
-        }
-
-        .menu-list {
-            display: flex;
-            gap: 5px;
-        }
-
-        .menu {
-            padding: 0 22px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s;
-        }
-
-        .menu:hover {
-            background-color: rgb(4, 4, 207);
-            cursor: pointer;
-            transform: scale(0.90);
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 26px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        /* ---------- Hero ---------- */
-        .hero {
-            width: 100%;
-            max-width: 1200px;
-            margin: 80px auto 0;
-            padding: 0 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            background-color: #F4F7FB;
-        }
-
-        .hero .text {
-            flex: 1;
-            font-size: 20px;
-        }
-
-        h1 { color: #172033; }
-
-        .btn {
-            display: inline-block;
-            padding: 8px 22px;
-            border: none;
-            background-color: #2563EB;
-            color: white;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 15px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .btn:hover { background-color: rgb(4, 4, 207); }
-
-        .card-img {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .card-img img {
-            width: 100%;
-            max-width: 420px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 2px 2px 5px rgba(82, 62, 38, 0.25);
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .card-img img:hover {
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-
-        /* ---------- Tentang saya ---------- */
-        .tentang-saya {
-            width: 100%;
-            margin-top: 80px;
-            padding: 60px 20px;
-            background-color: white;
-            text-align: center;
-            color: black;
-        }
-
-        .tentang-saya h1 {
-            font-size: 38px;
-            margin: 0 0 20px;
-        }
-
-        .tentang-saya p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* ---------- Keahlian ---------- */
-        .box-keahlian {
-            width: 100%;
-            padding: 60px 30px;
-            margin-top: 10px;
-            background-color: #F4F7FB;
-        }
-
-        .box-keahlian h1 {
-            text-align: center;
-            font-size: 38px;
-            margin: 0 0 40px;
-        }
-
-        .photo {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
-        }
-
-        .photo img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 16px;
-        }
-
-        /* ---------- Proyek ---------- */
-        .land-proyek {
-            width: 100%;
-            padding: 60px 30px;
-            margin-top: 10px;
-            background-color: white;
-        }
-
-        .text-proyek {
-            text-align: center;
-            color: black;
-        }
-
-        .text-proyek h2 {
-            font-size: 38px;
-            margin: 0 0 40px;
-        }
-
-        .box-proyek {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 30px;
-            align-items: stretch;
-        }
-
-        .box-photo-proyek {
-            display: flex;
-            flex-direction: column;
-            padding: 25px;
-            border: 1px solid #9a9a9a;
-            border-radius: 20px;
-            background-color: white;
-        }
-
-        .box-photo-proyek img {
-            width: 100%;
-            height: 220px;
-            object-fit: contain;
-            border-radius: 10px;
-            display: block;
-        }
-
-        .box-photo-proyek h3 {
-            font-size: 19px;
-            margin: 15px 0 5px;
-        }
-
-        .box-photo-proyek p {
-            font-size: 14px;
-            line-height: 1.5;
-            flex: 1;
-        }
-
-        .box-photo-proyek .btn { align-self: flex-start; }
-
-        /* ---------- Hubungi saya ---------- */
-        .hubungi-saya {
-            width: 100%;
-            padding: 40px 20px;
-            background-color: #F4F7FB;
-        }
-
-        .text-hs {
-            text-align: center;
-            margin: 0 0 20px;
-        }
-
-        .contact-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px 60px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .contact-item i { font-size: 40px; }
-
-        .contact-item p {
-            margin: 0;
-            font-size: 18px;
-            overflow-wrap: anywhere;
-        }
-
-        .contact-item a {
-            text-decoration: none;
-            color: black;
-        }
-
-        /* ---------- Footer ---------- */
-        .footer {
-            width: 100%;
-            padding: 30px 20px;
-            background-color: #a2a2a2;
-            text-align: center;
-        }
-
-        .footer h1 {
-            color: white;
-            font-size: 14px;
-            margin: 0;
-        }
-
-        /* ---------- Tablet ---------- */
-        @media (max-width: 992px) {
-            .box-proyek { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .hero { gap: 20px; }
-        }
-
-        /* ---------- HP ---------- */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-wrap: wrap;
-                padding: 10px 20px;
-                border-radius: 30px;
-            }
-
-            .name { font-size: 16px; white-space: normal; }
-
-            .menu-toggle { display: block; }
-
-            .menu-list {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                gap: 0;
-                padding-bottom: 10px;
-            }
-
-            .menu-list.open { display: flex; }
-
-            .menu {
-                width: 100%;
-                height: 44px;
-                justify-content: flex-start;
-            }
-
-            .hero {
-                flex-direction: column-reverse;
-                margin-top: 40px;
-                padding: 0 20px;
-                text-align: center;
-            }
-
-            .hero .text { font-size: 17px; }
-            .hero .text br { display: none; }
-
-            .card-img { padding: 0; }
-            .card-img img { max-width: 280px; }
-
-            .tentang-saya { margin-top: 40px; padding: 40px 20px; }
-            .tentang-saya h1,
-            .box-keahlian h1,
-            .text-proyek h2 { font-size: 28px; }
-            .tentang-saya p { font-size: 16px; }
-            .tentang-saya p br { display: none; }
-
-            .box-keahlian { padding: 40px 20px; }
-            .photo { grid-template-columns: 1fr; }
-            .photo img { height: 200px; }
-
-            .land-proyek { padding: 40px 20px; }
-            .box-proyek { grid-template-columns: 1fr; gap: 20px; }
-            .box-photo-proyek { padding: 20px; }
-
-            .contact-list { flex-direction: column; align-items: flex-start; gap: 25px; }
-            .contact-item i { font-size: 32px; }
-            .contact-item p { font-size: 15px; }
-
-            .footer h1 { font-size: 12px; line-height: 1.4; }
-        }
-    </style>
 </head>
+<style>
+    body{
+      background-color: #F4F7FB;
+      margin: 0;
+      padding: 0;
+       
+    }
+
+    .name{
+        color: white;
+         width: 220%;
+        height: 70px;
+        margin-right: 610px;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        font-size: 19px;
+        transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    }
+
+    .navbar{
+        width: 97%;
+        height: 70px;
+        background-color: #2563EB;
+        display: flex;
+        margin-top: 10px;
+        margin-left: 22px;
+        margin-right: 5px;
+        padding-left: 40px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 30px;
+        box-sizing: border-box;
+        border-radius: 30px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 2px 2px 5px black;
+    }
+
+    .menu{
+        width: 100%;
+        height: 70px;
+        background-color: transparent;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: white;
+        transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    }
+
+    .menu:hover{
+        background-color: rgb(4, 4, 207);
+        border-radius: 30px;
+        cursor: pointer;
+        transform: scale(0.80);
+    }
+
+    .hero{
+        width: 93%;
+        height: 600px;
+        margin-top: 120px;
+        margin-left: 90px;
+        display: flex   ;
+        justify-content: space-between;
+        background-color: #F4F7FB;
+
+
+    }
+
+
+    .text{
+       width: 100%;
+       font-size: 20px;
+      }
+    h1{
+      color: #172033;
+    }
+
+    .btnLihat{
+        width: 30%;
+        height: 30px;
+        border: none;
+        background-color: #2563EB;
+        color: white;
+        border-radius: 10px;
+    }
+
+    .btnLihat:hover{
+      background-color: rgb(4, 4, 207);
+
+    }
+
+      .card-img{
+        margin-top: 6px;
+        width: 50%;
+        height: 50%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        border-radius: 20px;
+        padding: 30px;
+      }
+
+      .card-img img{
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px rgba(82, 62, 38, 0.25);
+         transition: transform 0.4s cubic-bezier(0.2,0.8 , 0.2 ,1);
+      }
+       
+      .card-img img:hover{
+        color: #3b2a1e;
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+      
+      .tentang-saya{
+        width: 100%;
+        min-height: 45vh;
+        background-color: white;
+        box-sizing: border-box;
+        
+      }
+
+      .ts-text{
+        width: 100%;
+        height: 30px;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        color: black;
+
+      }
+
+      .ts-text h1{
+        font-size: 38px;
+        margin-top: 65px;
+      }
+
+      .ts-text p{
+        font-size: 20px;
+      }
+   
+      .box-keahlian{
+        width: 100%;
+        min-height: 70vh;
+        padding: 30px;
+        box-sizing: border-box;
+        margin-top: 10px;
+        background-color: #F4F7FB;
+
+      }
+
+      .bk-text h1{
+        text-align: center;
+        font-size: 38px;
+      }
+
+      .photo{
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 150px;
+      height: 100px;
+      padding: 50px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-radius: 16px;
+      }
+
+      .photo img{
+        width: 100%;
+       height: 340px;
+        border-radius: 16px;
+      }
+
+      
+      .land-proyek{
+        width: 100%;
+        min-height: 120vh;
+        padding: 30px;
+        display: flex;
+        box-sizing: border-box;
+        margin-top: 10px;
+        background-color: white;
+      }
+      
+   .text-proyek{
+      width: 100%;
+      height: 30px;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      color: black;
+      font-size: 38px;
+      
+      }
+
+    
+        .box-proyek {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 30px;
+        margin-top: 100px;
+
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 30px;
+
+        align-items: start;
+    }
+
+    .box-photo-proyek {
+        width: 100%;
+        min-height: 470px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        padding: 25px;
+        border: 1px solid #9a9a9a;
+        background-color: white;
+    }
+
+    .box-photo-proyek img {
+        width: 100%;
+        height: 260px;
+        object-fit: contain;
+        border-radius: 10px;
+        display: block;
+    }
+     .box-photo-proyek h3{
+      font-size: 19px;
+      margin-top: 1px;
+     }
+
+     .box-photo-proyek P{
+      font-size: 14px;
+     }
+
+     .btnlihatdisini{
+      width: 30%;
+        height: 30px;
+        border: none;
+        background-color: #2563EB;
+        color: white;
+        border-radius: 10px;
+     }
+
+
+
+     .btnlihatdisni:hover{
+      background-color: rgb(4, 4, 207);
+
+    }
+
+     .btnlihatdisini a {
+      text-decoration: none;
+      color: white;
+     }
+
+
+   
+     .btnlihatdisini-u{
+       width: 70%;
+        height: 40px;
+        border: none;
+        background-color: #2563EB;
+        color: white;
+        border-radius: 10px;
+     }
+
+     
+
+     .btnlihatdisni-u:hover{
+      background-color: rgb(4, 4, 207);
+
+    }
+
+     .btnlihatdisini-u a {
+      text-decoration: none;
+      color: white;
+     }  
+
+    .hubungi-saya{
+      width: 100%;
+      min-height: 31vh;
+      background-color:  #F4F7FB;
+    }
+    
+    .fa-instagram,
+    .fa-envelope {
+    font-size: 40px;
+    gap: 20px;
+   }
+
+    .text-hs{
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .icon{
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+     
+    }
+
+    .icon p a{
+      margin-left: 20px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .footer{
+      width: 100%;
+      min-height: 15vh;
+      background-color:  #a2a2a2;
+      display: grid;
+    }
+
+    .text-footer{
+      text-align: center;
+      font-size: 10px;
+      color: white;
+    }
+
+    .text-footer h1{
+       color: white;
+       margin-top: 45px;
+    }
+
+
+
+</style>
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="name">Renaissan Addakhil Ardia</div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <nav class="menu-list" id="menuList">
-            <a class="menu" href="#home">Home</a>
-            <a class="menu" href="#about">About</a>
-            <a class="menu" href="#product">Product</a>
-            <a class="menu" href="#contact">Contact</a>
-        </nav>
-    </div>
+   <!--Navbar-->
 
-    <!-- Hero -->
-    <div class="hero" id="home">
-        <div class="text">
-            <p>HALO,SAYA</p>
-            <h1>Renaissan Addakhil Ardia</h1>
-            <h3>SOFTWARE ENGINEER / FRONT-END</h3>
-            <p>Saya Adalah seorang pelajar yang tertarik<br>
-               pada dunia pemrograman web,desain,dan teknologi<br>
-               Saya adalah siswa kelas X Jurusan Pengembangan<br>
-               Perangkat Lunak Dan Gim di <b>SMK Yadika Soreang</b>
-            </p>
-            <a class="btn" href="#product">Lihat Proyek</a>
+   <div class="navbar">
+
+              <div class="name">Renaissan Addakhil Ardia</div>
+                <div class="menu">Home </div>
+                <div class="menu">About</div>
+                <div class="menu">Product</div>
+                <div class="menu">Contact</div>
+     </div>
+
+     <!--Hero-->
+
+     <div class="hero">
+
+          <div class="text">
+              <p>HALO,SAYA</p>
+          <H1>Renaissan Addakhil Ardia</H1>
+          <h3>SOFTWARE ENGINEER / FRONT-END</h3>
+          <p>Saya Adalah seorang pelajar yang tertarik<br>
+             pada dunia pemrograman web,desain,dan teknologi<br>
+             Saya adalah siswa kelas X Jurusan Pengembangan<br>
+             Perangkat Lunak Dan Gim di <b>SMK Yadika Soreang</b>
+          </p>
+
+            <button class="btnLihat">Lihat Proyek</button>
+
+          </div>
+
+            <!--card-->
+
+                 <div class="card-img">
+                   <img src="foto-kanan.png">
+                </div>
+     </div>
+
+     <!--tentang saya-->
+
+     <div class="tentang-saya">
+
+         <div class="ts-text">
+           <h1>
+            TENTANG SAYA
+          </h1>
+           <p>Saya adalah seorang pelajar yang tertarik pada dunia pemrograman web<br>
+              desain,dan teknologi.Saya terus belajar dan mengembangkan keterampilan<br>
+              untuk menjadi pengembang web yang profesional</p>
+             
+         </div>
+  
+
+     </div>
+
+     <!--keahlian-->
+
+     <div class="box-keahlian">
+        
+          <div class="bk-text">
+            <h1>
+              KEAHLIAN SAYA
+            </h1>
+          </div>
+
+          <!--box-photo-->
+     
+          <div class="box-photo">
+
+            <!--photo-->
+
+            <div class="photo">
+              <img src="https://static.vecteezy.com/system/resources/previews/001/416/705/non_2x/html5-emblem-orange-shield-and-white-text-vector.jpg">
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/001/416/680/small_2x/css3-emblem-blue-shield-and-white-text-vector.jpg">
+              <img src="https://www.thecodebuzz.com/wp-content/uploads/2020/06/Javascript-best-practices-1.jpg">
+            </div>
+
+          </div>
+
+     </div>
+
+
+
+      <!-- Proyek -->
+      <div class="land-proyek">
+
+          <div class="proyek">
+
+              <div class="text-proyek">
+                  <h2>Proyek Saya</h2>
+              </div>
+
+         
+              <div class="box-proyek">
+
+                  <!-- Foto Proyek 1 -->
+                  <div class="box-photo-proyek">
+                      <img src="mtigasi.png" alt="Website Mitigasi Bencana">
+                      <h3>Website Mitigasi Bencana</h3>
+                      <p>Website edukasi tentang mitigasi bencana <br>
+                          - Tugas Proyek IPAS </p>
+                      <button class="btnlihatdisini">
+                          <a href="https://mitigasi-bencana.vercel.app/" target="_blank">
+                              Lihat Detail
+                          </a>
+                      </button>
+                  </div>
+
+                  <!-- Foto Proyek 2 -->
+                  <div class="box-photo-proyek">
+                      <img src="umkm.png" alt="Website Mitigasi Bencana">
+                      <h3>Website UMKM</h3>
+                      <p> Website UMKM</p>
+                      <button class="btnlihatdisini-u">
+                          <a href="#" target="_blank">
+                              Sedang dalam tahap pengembanagn
+                          </a>
+                      </button>
+                  </div>
+
+                    <!-- Foto Proyek 3 -->
+                  <div class="box-photo-proyek">
+                      <img src="py.detec.jpeg" alt="Website Mitigasi Bencana">
+                      <h3>Peace- Blur-Detector</h3>
+                      <p> Program deteksi jari jika 2 jari terdetek akan terputar -foto kita blur<br>
+                         jika tangan di kepal maka akan <b>"HIDUP JOKOWI!!!"</b> </p>
+                  </div>
+
+
+                    <!-- Foto Proyek 4 -->
+                  <div class="box-photo-proyek">
+                      <img src="belajarcpu.png" alt="Website Mitigasi Bencana">
+                      <h3>Website Belajar CPU</h3>
+                      <p> Membahas singkat apa itu CPU</p>
+                      <button class="btnlihatdisini">
+                          <a href="https://renaisan.github.io/belajar.cpu/utama.html" target="_blank">
+                              Lihat Detail
+                          </a>
+                      </button>
+                  </div>
+
+
+                  
+                    <!-- Foto Proyek 5 -->
+                  <div class="box-photo-proyek">
+                      <img src="fcbayern.png" alt="Website Mitigasi Bencana">
+                      <h3>Website FC Bayern Munchen</h3>
+                      <p>Berisi tentang Sejarah 6x Kemanangan FC Bayern Munchen<br>
+                         Di liga CHAMPIONS LEAGUE , TREBEL WINNER & SIXTUPLE</p>
+                      <button class="btnlihatdisini">
+                          <a href="https://renaisan.github.io/fcbayern/index.HTML" target="_blank">
+                              Lihat Detail
+                          </a>
+                      </button>
+                  </div>
+
+
+                    <!-- Foto Proyek 6 -->
+                  <div class="box-photo-proyek">
+                      <img src="navbar.png" alt="Website Mitigasi Bencana">
+                      <h3>Website Navbar</h3>
+                      <p>latihan Navbar HTML CSS Sederhana</p>
+                      <button class="btnlihatdisini">
+                          <a href="https://github.com/renaisan/Navbar-HTML" target="_blank">
+                              Lihat Detail
+                          </a>
+                      </button>
+                  </div>
+
+
+
+              </div>
+          </div>
+      </div>
+
+      
+      <!--Hubungi Saya-->
+      <div class="hubungi-saya">
+
+        
+          <h1 class="text-hs">HUBUNGI SAYA</h1>
+       
+        <div class="icon">
+          <!--email-->
+
+                <div>
+                    <div class="box-info">
+                      <div class="icon">
+                          <i class="fa-solid fa-envelope"></i>
+                  <div class="text">
+                      <p>Email  <br>
+                        renaissanaddakhilardia@gmail.com</p>
+                  </div>
+              </diV>
+                </div>
+                </div>
+
+              <!--instagram-->
+
+              <div>
+                  <div class="box-info">
+                      <div class="icon">
+                          <i class="fa-brands fa-instagram"></i>
+                  <div class="text">
+                      <p>Instagram  <br>
+                        <a href="https://www.instagram.com/renntrust" target="_blank">@renntrust</a></p>
+                  </div>
+              </diV>
+              </div>  
+              </div>
+
         </div>
+      </div>
 
-        <div class="card-img">
-            <img src="foto-kanan.png" alt="Foto Renaissan Addakhil Ardia">
+
+      <div class="footer">
+        <div class="text-footer">
+           <h1>© 2026 Renaissan Addakhil Ardia. Semua hak dilindungi</h1>
         </div>
-    </div>
+      </div>
 
-    <!-- Tentang saya -->
-    <div class="tentang-saya" id="about">
-        <h1>TENTANG SAYA</h1>
-        <p>Saya adalah seorang pelajar yang tertarik pada dunia pemrograman web<br>
-           desain,dan teknologi.Saya terus belajar dan mengembangkan keterampilan<br>
-           untuk menjadi pengembang web yang profesional</p>
-    </div>
-
-    <!-- Keahlian -->
-    <div class="box-keahlian">
-        <h1>KEAHLIAN SAYA</h1>
-        <div class="photo">
-            <img src="https://static.vecteezy.com/system/resources/previews/001/416/705/non_2x/html5-emblem-orange-shield-and-white-text-vector.jpg" alt="HTML5">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/001/416/680/small_2x/css3-emblem-blue-shield-and-white-text-vector.jpg" alt="CSS3">
-            <img src="https://www.thecodebuzz.com/wp-content/uploads/2020/06/Javascript-best-practices-1.jpg" alt="JavaScript">
-        </div>
-    </div>
-
-    <!-- Proyek -->
-    <div class="land-proyek" id="product">
-        <div class="text-proyek">
-            <h2>Proyek Saya</h2>
-        </div>
-
-        <div class="box-proyek">
-
-            <!-- Proyek 1 -->
-            <div class="box-photo-proyek">
-                <img src="mtigasi.png" alt="Website Mitigasi Bencana">
-                <h3>Website Mitigasi Bencana</h3>
-                <p>Website edukasi tentang mitigasi bencana <br>
-                   - Tugas Proyek IPAS</p>
-                <a class="btn" href="https://mitigasi-bencana.vercel.app/" target="_blank" rel="noopener">Lihat Detail</a>
-            </div>
-
-            <!-- Proyek 2 -->
-            <div class="box-photo-proyek">
-                <img src="umkm.png" alt="Website UMKM">
-                <h3>Website UMKM</h3>
-                <p>Website UMKM</p>
-                <a class="btn" href="#">Sedang dalam tahap pengembangan</a>
-            </div>
-
-            <!-- Proyek 3 -->
-            <div class="box-photo-proyek">
-                <img src="py.detec.jpeg" alt="Peace-Blur-Detector">
-                <h3>Peace- Blur-Detector</h3>
-                <p>Program deteksi jari jika 2 jari terdetek akan terputar -foto kita blur<br>
-                   jika tangan di kepal maka akan <b>"HIDUP JOKOWI!!!"</b></p>
-            </div>
-
-            <!-- Proyek 4 -->
-            <div class="box-photo-proyek">
-                <img src="belajarcpu.png" alt="Website Belajar CPU">
-                <h3>Website Belajar CPU</h3>
-                <p>Membahas singkat apa itu CPU</p>
-                <a class="btn" href="https://renaisan.github.io/belajar.cpu/utama.html" target="_blank" rel="noopener">Lihat Detail</a>
-            </div>
-
-            <!-- Proyek 5 -->
-            <div class="box-photo-proyek">
-                <img src="fcbayern.png" alt="Website FC Bayern Munchen">
-                <h3>Website FC Bayern Munchen</h3>
-                <p>Berisi tentang Sejarah 6x Kemanangan FC Bayern Munchen<br>
-                   Di liga CHAMPIONS LEAGUE , TREBEL WINNER &amp; SIXTUPLE</p>
-                <a class="btn" href="https://renaisan.github.io/fcbayern/index.HTML" target="_blank" rel="noopener">Lihat Detail</a>
-            </div>
-
-            <!-- Proyek 6 -->
-            <div class="box-photo-proyek">
-                <img src="navbar.png" alt="Website Navbar">
-                <h3>Website Navbar</h3>
-                <p>latihan Navbar HTML CSS Sederhana</p>
-                <a class="btn" href="https://github.com/renaisan/Navbar-HTML" target="_blank" rel="noopener">Lihat Detail</a>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Hubungi Saya -->
-    <div class="hubungi-saya" id="contact">
-        <h1 class="text-hs">HUBUNGI SAYA</h1>
-
-        <div class="contact-list">
-            <div class="contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <p>Email<br>renaissanaddakhilardia@gmail.com</p>
-            </div>
-
-            <div class="contact-item">
-                <i class="fa-brands fa-instagram"></i>
-                <p>Instagram<br>
-                   <a href="https://www.instagram.com/renntrust" target="_blank" rel="noopener">@renntrust</a></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <h1>© 2026 Renaissan Addakhil Ardia. Semua hak dilindungi</h1>
-    </div>
-
-    <script>
-        const toggle = document.getElementById('menuToggle');
-        const list = document.getElementById('menuList');
-
-        toggle.addEventListener('click', () => {
-            const open = list.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', open);
-        });
-
-        list.querySelectorAll('a').forEach(a =>
-            a.addEventListener('click', () => {
-                list.classList.remove('open');
-                toggle.setAttribute('aria-expanded', 'false');
-            })
-        );
-    </script>
 </body>
 </html>
